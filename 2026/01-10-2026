@@ -1,0 +1,10 @@
+TODO
+  - Pre allow read only permissions (as well as git push to feature branch)
+  - claude code notifications on desktop and mobile
+  - ralph wiggum loop
+  - PRD practice
+  - Hook to create prompt log & convo history
+  - Agents md file to RHFL
+  - command for git commit push
+  - setup claude chrome
+  - claude chrome integ test
