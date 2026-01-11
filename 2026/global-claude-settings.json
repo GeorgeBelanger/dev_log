@@ -1,0 +1,233 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "mcp__builder-mcp__WorkspaceSearch",
+      "mcp__builder-mcp__InternalCodeSearch",
+      "mcp__builder-mcp__InternalSearch",
+      "mcp__builder-mcp__ReadInternalWebsites",
+      "mcp__builder-mcp__SearchAcronymCentral",
+      "mcp__builder-mcp__ReadRemoteTestRun",
+      "mcp__builder-mcp__GetPipelinesRelevantToUser",
+      "mcp__builder-mcp__GetPipelineHealth",
+      "mcp__builder-mcp__GetPipelineDetails",
+      "mcp__builder-mcp__GetDogmaClassification",
+      "mcp__builder-mcp__GetDogmaRecommendations",
+      "mcp__builder-mcp__ApolloReadActions",
+      "mcp__builder-mcp__MechanicDiscoverTools",
+      "mcp__builder-mcp__MechanicDescribeTool",
+      "mcp__builder-mcp__TicketingReadActions",
+      "mcp__builder-mcp__TaskeiGetTask",
+      "mcp__builder-mcp__TaskeiListTasks",
+      "mcp__builder-mcp__TaskeiGetRooms",
+      "mcp__builder-mcp__TaskeiGetRoomResources",
+      "mcp__builder-mcp__OncallReadActions",
+      "mcp__builder-mcp__GetSasRisks",
+      "mcp__builder-mcp__GetSasCampaigns",
+      "mcp__builder-mcp__GetPolicyEngineRisk",
+      "mcp__builder-mcp__GetPolicyEngineDashboard",
+      "mcp__builder-mcp__SearchSoftwareRecommendations",
+      "mcp__builder-mcp__GetSoftwareRecommendation",
+      "mcp__builder-mcp__CheckFilepathForCAZ",
+      "mcp__builder-mcp__WorkspaceGitDetails",
+      "mcp__builder-mcp__BrazilBuildAnalyzerTool",
+      "mcp__builder-mcp__BrazilPackageBuilderAnalyzerTool",
+      "mcp__builder-mcp__GKAnalyzeVersionSet",
+      "mcp__ide__getDiagnostics",
+      "WebFetch",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(pwd:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(less:*)",
+      "Bash(more:*)",
+      "Bash(wc:*)",
+      "Bash(tree:*)",
+      "Bash(which:*)",
+      "Bash(whereis:*)",
+      "Bash(file:*)",
+      "Bash(stat:*)",
+      "Bash(df:*)",
+      "Bash(du:*)",
+      "Bash(env:*)",
+      "Bash(printenv:*)",
+      "Bash(echo:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git remote:*)",
+      "Bash(git ls-files:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(brazil ws show:*)",
+      "Bash(brazil ws --show:*)",
+      "Bash(npm list:*)",
+      "Bash(npm ls:*)",
+      "Bash(pip list:*)",
+      "Bash(pip show:*)"
+    ]
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "type": "command"
+          },
+          {
+            "type": "command",
+            "name": "notify-input",
+            "command": "bash ~/.claude/hooks/scripts/notify-input.sh"
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "timeout": 86400,
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "type": "command"
+          },
+          {
+            "type": "command",
+            "name": "log-conversation",
+            "command": "bash ~/.claude/hooks/scripts/log-conversation.sh"
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "auto"
+      },
+      {
+        "hooks": [
+          {
+            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "type": "command"
+          }
+        ],
+        "matcher": "manual"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "curl -s -X POST http://localhost:8765/hook -H 'Content-Type: application/json' -d \"$(cat)\" > /dev/null 2>&1 &"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "name": "log-commands",
+            "command": "bash ~/.claude/hooks/scripts/log-commands.sh"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "curl -s -X POST http://localhost:8765/hook -H 'Content-Type: application/json' -d \"$(cat)\" > /dev/null 2>&1 &"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "curl -s -X POST http://localhost:8765/hook -H 'Content-Type: application/json' -d \"$(cat)\" > /dev/null 2>&1 &"
+          },
+          {
+            "type": "command",
+            "name": "block-apps",
+            "command": "curl -X POST https://api.pushcut.io/kmej-19Q2cGviKtcdSh5E/notifications/BlockApps"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "curl -s -X POST http://localhost:8765/hook -H 'Content-Type: application/json' -d \"$(cat)\" > /dev/null 2>&1 &"
+          },
+          {
+            "type": "command",
+            "name": "unblock-apps",
+            "command": "curl -X POST https://api.pushcut.io/kmej-19Q2cGviKtcdSh5E/notifications/UnblockApps"
+          },
+          {
+            "type": "command",
+            "name": "notify-complete",
+            "command": "bash ~/.claude/hooks/scripts/notify-complete.sh"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "curl -s -X POST http://localhost:8765/hook -H 'Content-Type: application/json' -d \"$(cat)\" > /dev/null 2>&1 &"
+          },
+          {
+            "type": "command",
+            "name": "log-user-prompts",
+            "command": "bash ~/.claude/hooks/scripts/log-user-prompts.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
