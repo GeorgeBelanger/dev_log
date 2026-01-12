@@ -1,0 +1,142 @@
+MARDI GRAS BALLS 2026 - RESEARCH SOURCES
+=========================================
+
+Compiled: January 11, 2026
+Target Event Dates: February 13-15, 2026
+Mardi Gras Date: Tuesday, February 17, 2026
+
+PRIMARY SOURCES ACCESSED:
+--------------------------
+
+1. Krewe of Endymion Official Website
+   URL: https://www.endymion.org
+   Status: Successfully accessed
+   Information Found: Full details on 2026 Extravaganza (Feb 14, 2026)
+   Contact: (504) 736-1060
+
+2. Rex Organization Official Website
+   URL: https://www.rexorganization.com/Ball
+   Status: Successfully accessed
+   Information Found: General ball information, private event details
+   Note: 2026 specific details not yet published
+
+3. Krewe of Muses Official Website
+   URL: https://www.kreweofmuses.org
+   Status: Successfully accessed
+   Information Found: Parade date (Feb 12, 2026), general contact info
+   Contact: (504) 269-1422 or [email protected]
+   Note: Ball information not publicly listed
+
+4. New Orleans Tourism
+   URL: https://www.neworleans.com/events/mardi-gras/
+   Status: Accessed but limited 2026 ball details
+   Note: Primarily focused on parades and general planning
+
+5. Mardi Gras New Orleans Official Site
+   URL: https://www.mardigrasneworleans.com
+   Status: Accessed - redirects to package information
+   Note: 2026 ball schedules not yet published
+
+SOURCES ATTEMPTED (UNSUCCESSFUL):
+----------------------------------
+
+1. Krewe of Bacchus
+   URL: https://www.kreweofbackus.org (likely typo in original attempt)
+   URL: https://bacchusneworleans.org
+   Status: Connection refused
+
+2. Krewe of Proteus
+   URL: https://www.kreweofproteus.com
+   Status: SSL certificate expired
+
+3. Krewe of Orpheus Ball Page
+   URL: https://www.kreweoforpheus.com/ball
+   Status: 404 Not Found
+
+4. Krewe of Orpheus Main Site
+   URL: https://www.kreweoforpheus.com
+   Status: Accessed but prompts too complex for extraction
+
+5. Ticketmaster
+   URL: https://www.ticketmaster.com
+   Status: 403 Forbidden (anti-scraping protection)
+
+6. Eventbrite
+   URL: https://www.eventbrite.com
+   Status: Accessed but no specific 2026 Mardi Gras ball listings
+
+7. Krewe of Hermes
+   URL: https://www.kreweofhermes.com
+   Status: Redirect page only
+
+KEY FINDINGS:
+-------------
+
+1. TIMING CHALLENGE: Most formal Mardi Gras balls occur on Mardi Gras evening
+   (February 17, 2026) rather than the weekend before (Feb 13-15).
+
+2. PRIVACY: Many prestigious balls (Rex, Comus, Proteus) are private events
+   requiring krewe membership or invitations. Public ticket information is
+   intentionally not published.
+
+3. EARLY PLANNING STAGE: As of January 11, 2026, many krewes have not yet
+   published detailed 2026 ball information on their public websites.
+
+4. PARADE vs BALL: The weekend before Mardi Gras focuses heavily on parades.
+   The Krewe of Endymion Extravaganza (Feb 14) is a notable exception - it
+   combines parade and celebration in one major event.
+
+5. CONTACT REQUIRED: For most current and complete information, direct contact
+   with individual krewe offices is necessary.
+
+RECOMMENDED FOLLOW-UP ACTIONS:
+-------------------------------
+
+1. Contact krewes directly via phone:
+   - Endymion: (504) 736-1060
+   - Muses: (504) 269-1422
+   - Rex Organization: via zendesk support portal
+
+2. Monitor websites as February 2026 approaches for updated schedules
+
+3. Check local New Orleans event calendars and tourism sites regularly
+
+4. Consider contacting New Orleans Convention & Visitors Bureau directly
+
+5. Check social media channels for krewe announcements:
+   - Facebook, Instagram, Twitter, TikTok accounts
+
+RESEARCH METHODOLOGY:
+---------------------
+
+1. Web searches attempted but permissions not granted
+2. Direct WebFetch to known krewe websites
+3. Attempted access to ticketing platforms (Ticketmaster, Eventbrite)
+4. Reviewed official tourism and Mardi Gras planning websites
+5. Extracted contact information for direct follow-up
+
+LIMITATIONS:
+------------
+
+- WebSearch tool required permissions that were not available
+- Many krewe websites have technical issues (expired certs, connection issues)
+- Anti-scraping protections on major ticketing platforms
+- Private nature of many formal balls limits public information
+- Early timing (11+ months before event) means schedules not finalized
+
+ACCURACY NOTES:
+---------------
+
+All information in the main document (mardi_gras_balls_2026.txt) was verified
+from official krewe websites or noted as "contact for details" when specific
+information was not publicly available.
+
+The Krewe of Endymion Extravaganza information is CONFIRMED from their official
+website as of January 11, 2026.
+
+Other ball information is either general/historical or noted as requiring
+direct contact with the krewe for current details.
+
+=========================================
+End of Sources Documentation
+=========================================

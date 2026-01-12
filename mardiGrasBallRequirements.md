@@ -1,0 +1,1 @@
+I want to create a txt file with a list of formal masquarade balls for mardi gras in new orleans the weekend before mardi gras (which is tuesday feb 17 2026) with price, location, ticket link if available
