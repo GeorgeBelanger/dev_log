@@ -54,3 +54,449 @@ can we make a test project that collects all the formal masquarade balls for mar
 [2026-01-14 23:40:02] USER PROMPT:
 /commit-push 
 
+====================================
+[2026-02-01 20:10:04] USER PROMPT:
+can you read this thread and advise how we can take concrete steps to implement these improvements\
+\
+https://x.com/bcherny/status/2017742741636321619
+
+====================================
+[2026-02-01 20:24:27] USER PROMPT:
+yes i want to make the claude.md in the base directory - can you review this and see if this would accomplish what we are trying to do\
+\
+## Workflow Orchestration
+### 1. Plan Mode Default
+- Enter plan mode for ANY non-trivial task (3+ steps or architectural decisions)
+- If something goes sideways, STOP and re-plan immediately - don't keep pushing
+- Use plan mode for verification steps, not just building
+- Write detailed specs upfront to reduce ambiguity
+### 2. Subagent Strategy
+- Use subagents liberally to keep main context window clean
+- Offload research, exploration, and parallel analysis to subagents
+- For complex problems, throw more compute at it via subagents
+- One task per subagent for focused execution
+### 3. Self-Improvement Loop
+- After ANY correction from the user: update 'tasks/lessons.md"
+with the pattern
+- Write rules for yourself that prevent the same mistake
+- Ruthlessly iterate on these lessons until mistake rate drops
+- Review lessons at session start for relevant project
+### 4. Verification Before Done
+- Never mark a task complete without proving it works
+- Diff behavior between main and your changes when relevant
+- Ask yourself: "Would a staff engineer approve this?"
+- Run tests, check logs, demonstrate correctness
+### 5. Demand Elegance (Balanced)
+- For non-trivial changes: pause and ask "is there a more elegant way?"
+- If a fix feels hacky: "Knowing everything I know now, implement the elegant solution"
+- Skip this for simple, obvious fixes - don't over-engineer
+- Challenge your own work before presenting it
+### 6. Autonomous Bug Fixing
+- When given a bug report: just fix it. Don't ask for hand-holding
+- Point at logs, errors, failing tests - then resolve them
+- Zero context switching required from the user
+- Go fix failing CI tests without being told how
+## Task Management
+1. **Plan First**: Write plan to "tasks/todo.md" with checkable items
+2. **Verify Plan**: Check in before starting implementation
+3. **Track Progress**: Mark items complete as you go
+4. **Explain Changes**: High-level summary at each step
+5. **Document Results**: Add review section to "tasks/todo.md"
+**Capture Lessons**: Update "tasks/lessons.md' after corrections
+## Core Principles
+- **Simplicity First**: Make every change as simple as possible. Impact minimal code.
+- **No Laziness**: Find root causes. No temporary fixes. Senior developer standards.
+- **Minimal Impact**: Changes should only touch what's necessary Avoid introducing bugs.
+
+====================================
+[2026-02-01 20:28:08] USER PROMPT:
+it is possible to add this as a base template and then whenever a new claude.md is created in a repo, import this first
+
+====================================
+[2026-02-01 20:28:46] USER PROMPT:
+yes but also include the skills/slash commands portion and the learning output style. 
+
+====================================
+[2026-02-01 20:29:22] USER PROMPT:
+also does the tasks/todo.md interfere with claudes task primatives
+
+====================================
+[2026-02-01 20:30:01] USER PROMPT:
+how do git worktrees work
+
+====================================
+[2026-02-01 20:31:07] USER PROMPT:
+is it possible for a claude session to do this on thier own via subagents
+
+====================================
+[2026-02-01 20:32:08] USER PROMPT:
+can we include this directive in the base claude.md
+
+====================================
+[2026-02-01 20:37:27] USER PROMPT:
+I am a software l5 at aws currently. I am looking for new engineering jobs in austin that pay more than I currently make. I ideally want the job to have a focus on AI. I have experience creating agents. I want to come up with a cron directive for openclaw that can run hourly that looks for job postings that fit the above description and gathers facets from each listing to enter into a CSV. 
+
+====================================
+[2026-02-01 20:45:20] USER PROMPT:
+cant i reference the json when adding a cron
+
+====================================
+[2026-02-01 20:51:49] USER PROMPT:
+looks like its going to ~/clawd/output/jobs.csv
+
+====================================
+[2026-02-01 20:53:22] USER PROMPT:
+here is the output, does it meet your standard?\
+\
+timestamp,source,company,title,url,salary_min,salary_max,remote_policy,ai_focus_area,required_skills,preferred_skills,level,team_description,posting_date,is_new
+2026-02-02T02:48:00Z,builtinaustin,Affirm,Senior Director ML - Head of Centralized ML,https://www.builtinaustin.com/jobs/data-analytics/machine-learning,305000,375000,remote,ML strategy;model development lifecycle,AI;Machine Learning,,Expert/Leader,Lead centralized ML efforts managing model development lifecycles and fostering AI adoption,2026-01-19,true
+2026-02-02T02:48:00Z,builtinaustin,Affirm,Senior Staff Machine Learning Engineer,https://www.builtinaustin.com/jobs/data-analytics/machine-learning,232000,310000,remote,ML systems;financial services,Kubeflow;Mlflow;Python;PyTorch;Ray;Spark;Xgboost,,Senior Staff,Lead complex ML system design and implementation at Affirm,2026-01-30,true
+2026-02-02T02:48:00Z,builtinaustin,Unknown (Fintech/Blockchain),Senior Staff Machine Learning Engineer - Fraud/AI,https://www.builtinaustin.com/jobs/data-analytics/machine-learning,263000,309000,remote,AI/ML;financial fraud detection,Apache Airflow;Flink;Hadoop;Hive;Kafka;Kinesis;Python;PyTorch;Snowflake;Spark;TensorFlow,,Senior Staff,Lead AI/ML initiatives and combat financial fraud through advanced methodologies,2026-01-30,true
+2026-02-02T02:48:00Z,builtinaustin,Unknown (Fintech),Senior Director Financial Systems & Architecture,https://www.builtinaustin.com/jobs/artificial-intelligence,253000,355000,remote,AI;business intelligence;automation,AI;BI;Cloud-Based Systems;Data Architecture;Data Warehousing;ERP;SQL,,Expert/Leader,Lead financial systems architecture with AI-driven automation,2026-01-19,true
+2026-02-02T02:48:00Z,builtinaustin,Cloudflare,Sr. Solution Architect - AI/Developer Platform,https://www.builtinaustin.com/jobs/artificial-intelligence,270000,330000,hybrid,AI platform;developer tools,AI;AWS;Azure;Cloud Computing;GCP;Full-Stack Engineering;Web Technologies,,Mid/Senior,Lead Cloudflare AI/Developer Platform sales and design solutions,2026-01-31,true
+2026-02-02T02:48:00Z,builtinaustin,Unknown (Semiconductor/IoT),Principal Machine Learning Engineer,https://www.builtinaustin.com/jobs/data-analytics/machine-learning,241000,326000,onsite,ML algorithms;ARM optimization,Python;PyTorch;TensorFlow,,Principal,Develop ML algorithms and optimize on ARM computing platforms,2026-02-01,true
+2026-02-02T02:48:00Z,builtinaustin,GM,Staff Machine Learning Engineer,https://www.builtinaustin.com/jobs/data-analytics/machine-learning,199000,305000,hybrid,ML infrastructure;GPU;AI platform,AWS;Azure;C++;GCP;Go;Kubernetes;Python;PyTorch;Ray;Torchx,,Staff,Design backend software for GM's AI ecosystem with GPU integration,2026-02-01,true
+2026-02-02T02:48:00Z,builtinaustin,Unknown (Cloud/Fintech/Food),Senior Engineering Manager ML & AI,https://www.builtinaustin.com/jobs/data-analytics/machine-learning,200000,320000,remote,Data Science;ML strategy,Data Science;Machine Learning;PyTorch;Scikit;TensorFlow,,Senior Manager,Lead Data Science and ML initiatives across R&D,2026-01-30,true
+2026-02-02T02:48:00Z,builtinaustin,CrowdStrike,Senior AI Framework Engineer - Endpoint Security,https://www.builtinaustin.com/jobs/artificial-intelligence,195000,290000,hybrid,AI framework;endpoint security;computer vision,AI;C/C++;GPU;Linux;macOS;ML;NPU;ONNX;OpenVINO;Windows,,Senior,Lead development of AI framework for endpoint security,2026-01-31,true
+2026-02-02T02:48:00Z,builtinaustin,Unknown (Healthtech),VP/Director AI Strategy - Healthcare,https://www.builtinaustin.com/jobs/artificial-intelligence,159000,273000,hybrid,AI strategy;healthcare;NLP,AI Governance;AI Tools;AWS;Azure;Deep Learning;GCP;ML;NLP;Python;Statistical Analysis,,Expert/Leader,Lead AI strategy development and execution in healthcare,2026-01-28,true
+2026-02-02T02:48:00Z,linkedin,Google,Staff Software Engineer Google Cloud Generative AI,https://www.linkedin.com/jobs/google-machine-learning-jobs-austin-texas-metropolitan-area,250000,400000,hybrid,Generative AI;LLM;cloud,unknown,,Staff,Google Cloud Gen AI team in Austin,2026-01-28,true
+2026-02-02T02:48:00Z,linkedin,Google,Senior Staff Software Engineer Google Cloud Generative AI,https://www.linkedin.com/jobs/google-machine-learning-jobs-austin-texas-metropolitan-area,300000,500000,hybrid,Generative AI;LLM;cloud,unknown,,Senior Staff,Google Cloud Gen AI team in Austin,2026-01-28,true
+2026-02-02T02:48:00Z,builtinaustin,Unknown (AdTech),Staff Machine Learning Engineer,https://www.builtinaustin.com/jobs/data-analytics/machine-learning,210000,275000,remote,ML models;recommendation systems;deep learning,Deep Neural Networks;ML;Neural Networks;Python;Recommendation Systems,,Staff,Develop and maintain ML models for decision-making in AdTech,2026-01-27,true
+
+====================================
+[2026-02-01 20:55:06] USER PROMPT:
+how do i update the cron 
+
+====================================
+[2026-02-01 21:02:55] USER PROMPT:
+here is the bots response after a run\
+\
+Let me start by checking the existing CSV and setting up the workspace.
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+CSV exists with headers only. Let me search all sources systematically. I'll start with web searches to find individual listings, then use browser for sites that need it.
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Rate limited on search. Let me use browser automation to hit the sources directly. I'll start with Built In Austin and fetch some individual listings.
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Let me search more targeted sources for $250k+ roles. I'll use browser for LinkedIn and check the high-paying company career pages.
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Now let me fetch the individual Tesla and other high-value listings:
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Google careers page is JS-rendered. Let me try browser automation for the key sources and also search for more specific high-comp roles.
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Let me now use browser to search the key sources that need JS rendering, starting with the most fruitful ones.
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Browser automation isn't available. Let me work with web_fetch to get individual listings from the sources I've found.
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Good finds. Let me fetch the individual listings that look promising for $250k+:
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Let me get the salary info from the Visa listing and search for more high-comp roles.
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Good — Visa Principal ML role: $193,700 - $281,100 base + bonus + equity. With TC likely >$250k. Let me now search for more high-comp listings and also check some FAANG career pages.
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Apple's job site is JS-rendered. Let me search more specifically for Apple Austin ML roles.
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Apple's site is JS-rendered too — only legal boilerplate comes through. Let me now search for more specific high-comp roles and compile what I have.
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Let me fetch the most promising ones:
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Now let me search for a few more sources and then compile the CSV.
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Now let me also search for Meta, Google, and other FAANG roles specifically in Austin:
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Let me now search for a few more specific high-value individual listings and then compile everything:
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Now let me get the Realtor.com posting salary and fetch a couple more listings, then compile the CSV:
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Excellent! Found some great ones. Let me get details on the Affirm and Coinbase listings:
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Let me search for the direct Affirm and Coinbase job URLs:
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+The Greenhouse page just showed the application form. Let me search for the actual listing content:
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Now let me also find the Coinbase listing details and the Tesla Austin roles, then compile:
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Now I have enough data. Let me compile the qualifying listings into the CSV. Based on my research, here are the roles that meet the $250k+ TC criteria:
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+Now let me print the summary:
+
+Job Search Summary — February 1, 2026
+
+Sources Checked
+
+| Source              | Status                                                                |
+| ------------------- | --------------------------------------------------------------------- |
+| Built In Austin     | ✅ Searched (ML, AI, senior/expert levels)                             |
+| LinkedIn Jobs       | ✅ Searched (individual listing URLs found)                            |
+| Indeed              | ✅ Searched (limited — no individual URLs extractable without browser) |
+| Wellfound           | ⚠️ Blocked — JS-rendered, no individual listings extractable          |
+| ai-jobs.net         | ❌ Redirects to foorilla.com — site appears defunct                    |
+| Tesla Careers       | ⚠️ Blocked (403) — URLs found via search but couldn't scrape details  |
+| Meta Careers        | ⚠️ Blocked (login required / 400 error)                               |
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+| Google Careers      | ⚠️ JS-rendered — no listings extractable via fetch                    |
+| Apple Careers       | ⚠️ JS-rendered — 1 Austin ML listing found via search                 |
+| Oracle/AMD/Dell/IBM | ⚠️ Not reachable this run (rate limits hit)                           |
+
+Results
+
+• New listings found: 13
+• Duplicates skipped: 0 (first run)
+• CSV path: ~/Programming/job-hunter/output/jobs.csv
+Top 3 by Estimated Total Compensation
+
+Optiver — ML Researcher (Austin, onsite): ~$250K–$400K+ TC,
+Arm — SoC Architect (Austin, onsite): $273K–$369K base,
+Coinbase — Senior Staff ML Engineer, Risk AI/ML (Remote): $263K–$309K base + equity,
+Notes
+:thumbsup:
+Click to react
+:fire:
+Click to react
+:eyes:
+Click to react
+Add Reaction
+Reply
+Forward
+More
+[9:00 PM]Sunday, February 1, 2026 at 9:00 PM
+• Tesla and Apple salary ranges are estimated based on levels.fyi/Glassdoor data (not posted on listings).
+• Visa Principal ML and Affirm Senior Staff roles have confirmed salary ranges from postings.
+• Browser automation was unavailable (no attached Chrome tab), limiting ability to scrape JS-rendered sites (Google, Apple, Meta, Wellfound). Future runs with browser access will yield more results.
+• Several sources were rate-limited (Brave Search free plan: 1 req/sec). Spread across hourly runs.
+
+====================================
+[2026-02-01 21:03:20] USER PROMPT:
+yes lets update
+
+====================================
+[2026-02-01 21:04:39] USER PROMPT:
+it does have browser automation though. also can we add a sleep time to address the rate limiting (im on brave free tier)
+
+====================================
+[2026-02-01 21:05:00] USER PROMPT:
+1 request per 5 seconds should be fien
+
+====================================
+[2026-02-01 21:06:24] USER PROMPT:
+commit and push the job-hunter changes
+
