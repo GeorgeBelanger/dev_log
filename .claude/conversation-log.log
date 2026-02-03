@@ -6482,3 +6482,252 @@
   "tool_use_id": "toolu_01PLzxa4q8Wu12VK177nRCZC"
 }
 
+[2026-02-02 23:27:58] EVENT:
+{
+  "session_id": "505e3ad4-88ab-491f-82cd-9240b9534f88",
+  "transcript_path": "/Users/georgebelanger/.claude/projects/-Users-georgebelanger-Programming-dev-log/505e3ad4-88ab-491f-82cd-9240b9534f88.jsonl",
+  "cwd": "/Users/georgebelanger/Programming/dev_log",
+  "permission_mode": "acceptEdits",
+  "hook_event_name": "PostToolUse",
+  "tool_name": "Read",
+  "tool_input": {
+    "file_path": "/Users/georgebelanger/Programming/job-hunter/prompts/job-search.md"
+  },
+  "tool_response": {
+    "type": "text",
+    "file": {
+      "filePath": "/Users/georgebelanger/Programming/job-hunter/prompts/job-search.md",
+      "content": "# Hourly Austin AI Job Search Directive\n\nYou are an autonomous job search agent. Search for AI/ML engineering roles in Austin, TX paying >$250k total compensation. Extract structured data and append new listings to `~/Programming/job-hunter/output/jobs.csv`.\n\n## Critical Rules\n\n1. **Every URL must be a unique, individual job posting URL** — never use category/search result page URLs. If you cannot get a direct link to the posting, construct one from the job ID.\n2. **Click into each listing** to extract the real company name, full skills list, and salary. Do not guess from search result snippets.\n3. **Search ALL listed sources**, not just the first one or two that work. If a source is blocked or empty, note it in the summary and move on.\n4. **Rate limiting**: You are on Brave free tier. **Wait at least 5 seconds between web_search calls.** Use `bash sleep 5` or equivalent between searches. Prefer browser automation (navigate + scrape) over web_search when possible — browser has no rate limit.\n5. **Use browser automation as primary tool.** Navigate directly to job board URLs and scrape listings from the page. Reserve `web_search` for finding individual posting URLs that you can't get by browsing.\n\n## Search Sources\n\nSearch each of these using browser automation (navigate directly, scrape the page). Use `web_search` only as a fallback, with 5-second sleeps between calls. Spend roughly equal effort on each.\n\n1. **Built In Austin** — https://www.builtinaustin.com/jobs?search=machine+learning and https://www.builtinaustin.com/jobs?search=artificial+intelligence — click into each result to get the individual posting URL and company name\n2. **LinkedIn Jobs** — Search: `Austin \"artificial intelligence\" OR \"machine learning\"` filtered to Senior+ level. Click into each job card to get the `/jobs/view/<id>` URL.\n3. **Indeed** — Search: `AI engineer Austin TX`, filter salary $200k+. Click into postings.\n4. **Wellfound (AngelList)** — Browse Austin AI startup roles\n5. **ai-jobs.net** — Search Austin listings\n6. **Direct career pages** (search each for Austin AI/ML roles):\n   - Tesla AI (tesla.com/careers)\n   - Meta (metacareers.com)\n   - Google (careers.google.com)\n   - Apple (jobs.apple.com)\n   - Oracle (careers.oracle.com)\n   - AMD (jobs.amd.com)\n   - Indeed (indeed.com/cmp/Indeed/jobs)\n   - IBM (ibm.com/careers)\n   - Dell (jobs.dell.com)\n\n## Filter Criteria\n\nOnly include listings that match ALL of:\n- **Location**: Austin, TX — or remote roles explicitly available to Austin residents\n- **Compensation**: Listed comp >$250k TC, or company known to pay >$250k for senior roles (FAANG, tier-1 tech)\n- **AI/ML focus**: Title or description mentions AI, ML, agents, LLMs, NLP, computer vision, generative AI, deep learning, or transformers\n- **Level**: Senior, Staff, Principal, L5, L6, or equivalent\n\n## Extraction\n\nFor each qualifying listing, **click into the individual posting page** and extract these CSV fields:\n\n```\ntimestamp, source, company, title, url, salary_min, salary_max, remote_policy,\nai_focus_area, required_skills, preferred_skills, level, team_description,\nposting_date, is_new\n```\n\nField notes:\n- `timestamp`: ISO 8601 when you found this listing\n- `source`: builtinaustin, linkedin, indeed, wellfound, ai-jobs, or company name for direct pages\n- `url`: **Must be the individual job posting URL**, not a search/category page. Examples:\n  - Good: `https://www.builtinaustin.com/job/affirm/senior-staff-ml-engineer/234567`\n  - Good: `https://www.linkedin.com/jobs/view/3845672901`\n  - Bad: `https://www.builtinaustin.com/jobs/data-analytics/machine-learning`\n  - Bad: `https://www.linkedin.com/jobs/google-machine-learning-jobs-austin`\n- `company`: The actual company name, never \"Unknown\". Click into the posting to find it.\n- `remote_policy`: onsite, hybrid, remote, or unknown\n- `ai_focus_area`: e.g. \"LLM agents\", \"computer vision\", \"ML infrastructure\"\n- `required_skills` and `preferred_skills`: semicolon-separated lists extracted from the posting\n- `is_new`: true (all appended rows are new by definition)\n\n## Deduplication\n\n1. Read the existing `~/Programming/job-hunter/output/jobs.csv`\n2. Collect all URLs already present\n3. Only append listings whose URL is NOT already in the CSV\n4. If a listing has no URL, deduplicate by (company + title) pair\n\n## Output\n\n1. Append new rows to `~/Programming/job-hunter/output/jobs.csv`\n2. Print a summary to stdout:\n   - Sources checked (list each, note if blocked/empty)\n   - Number of new listings found\n   - Number of duplicates skipped\n   - Top 3 new listings by estimated compensation\n",
+      "numLines": 80,
+      "startLine": 1,
+      "totalLines": 80
+    }
+  },
+  "tool_use_id": "toolu_01W1QoeaE3qVuE1Z9MukK2N6"
+}
+
+[2026-02-02 23:28:34] EVENT:
+{
+  "session_id": "505e3ad4-88ab-491f-82cd-9240b9534f88",
+  "transcript_path": "/Users/georgebelanger/.claude/projects/-Users-georgebelanger-Programming-dev-log/505e3ad4-88ab-491f-82cd-9240b9534f88.jsonl",
+  "cwd": "/Users/georgebelanger/Programming/dev_log",
+  "permission_mode": "acceptEdits",
+  "hook_event_name": "PostToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "/Users/georgebelanger/Programming/job-hunter/prompts/job-search.md",
+    "content": "# Hourly Austin Software Engineer Job Search Directive\n\nYou are an autonomous job search agent. Search for software engineering roles in Austin, TX paying >$250k total compensation. Extract structured data and append new listings to `~/Programming/job-hunter/output/jobs.csv`.\n\n## Critical Rules\n\n1. **Every URL must be a unique, individual job posting URL** — never use category/search result page URLs. If you cannot get a direct link to the posting, construct one from the job ID.\n2. **Click into each listing** to extract the real company name, full skills list, and salary. Do not guess from search result snippets.\n3. **Search ALL listed sources**, not just the first one or two that work. If a source is blocked or empty, note it in the summary and move on.\n4. **Rate limiting**: You are on Brave free tier. **Wait at least 5 seconds between web_search calls.** Use `bash sleep 5` or equivalent between searches. Prefer browser automation (navigate + scrape) over web_search when possible — browser has no rate limit.\n5. **Use browser automation as primary tool.** Navigate directly to job board URLs and scrape listings from the page. Reserve `web_search` for finding individual posting URLs that you can't get by browsing.\n\n## Search Sources\n\nSearch each of these using browser automation (navigate directly, scrape the page). Use `web_search` only as a fallback, with 5-second sleeps between calls. Spend roughly equal effort on each.\n\n1. **Built In Austin** — https://www.builtinaustin.com/jobs?search=software+engineer&level=senior&level=lead — click into each result to get the individual posting URL and company name\n2. **LinkedIn Jobs** — Search: `Austin \"software engineer\" OR \"backend engineer\" OR \"full stack\"` filtered to Senior+ level. Click into each job card to get the `/jobs/view/<id>` URL.\n3. **Indeed** — Search: `software engineer Austin TX`, filter salary $200k+. Click into postings.\n4. **Wellfound (AngelList)** — Browse Austin startup engineering roles\n5. **Direct career pages** (search each for Austin software engineering roles):\n   - Tesla (tesla.com/careers)\n   - Meta (metacareers.com)\n   - Google (careers.google.com)\n   - Apple (jobs.apple.com)\n   - Oracle (careers.oracle.com)\n   - AMD (jobs.amd.com)\n   - Indeed (indeed.com/cmp/Indeed/jobs)\n   - IBM (ibm.com/careers)\n   - Dell (jobs.dell.com)\n   - Cloudflare (cloudflare.com/careers)\n   - Stripe (stripe.com/jobs)\n   - Coinbase (coinbase.com/careers)\n\n## Filter Criteria\n\nOnly include listings that match ALL of:\n- **Location**: Austin, TX — or remote roles explicitly available to Austin residents\n- **Compensation**: Listed comp >$250k TC, or company known to pay >$250k for senior roles (FAANG, tier-1 tech)\n- **Role type**: Software Engineer, Backend Engineer, Full Stack Engineer, Platform Engineer, Infrastructure Engineer, or similar engineering IC roles\n- **Level**: Senior, Staff, Principal, L5, L6, or equivalent\n\n## Extraction\n\nFor each qualifying listing, **click into the individual posting page** and extract these CSV fields:\n\n```\ntimestamp, source, company, title, url, salary_min, salary_max, remote_policy,\nfocus_area, required_skills, preferred_skills, level, team_description,\nposting_date, is_new\n```\n\nField notes:\n- `timestamp`: ISO 8601 when you found this listing\n- `source`: builtinaustin, linkedin, indeed, wellfound, or company name for direct pages\n- `url`: **Must be the individual job posting URL**, not a search/category page. Examples:\n  - Good: `https://www.builtinaustin.com/job/stripe/senior-backend-engineer/234567`\n  - Good: `https://www.linkedin.com/jobs/view/3845672901`\n  - Bad: `https://www.builtinaustin.com/jobs?search=software+engineer`\n  - Bad: `https://www.linkedin.com/jobs/software-engineer-jobs-austin`\n- `company`: The actual company name, never \"Unknown\". Click into the posting to find it.\n- `remote_policy`: onsite, hybrid, remote, or unknown\n- `focus_area`: e.g. \"backend\", \"full stack\", \"infrastructure\", \"platform\", \"distributed systems\"\n- `required_skills` and `preferred_skills`: semicolon-separated lists extracted from the posting\n- `is_new`: true (all appended rows are new by definition)\n\n## Deduplication\n\n1. Read the existing `~/Programming/job-hunter/output/jobs.csv`\n2. Collect all URLs already present\n3. Only append listings whose URL is NOT already in the CSV\n4. If a listing has no URL, deduplicate by (company + title) pair\n\n## Output\n\n1. Append new rows to `~/Programming/job-hunter/output/jobs.csv`\n2. Print a summary to stdout:\n   - Sources checked (list each, note if blocked/empty)\n   - Number of new listings found\n   - Number of duplicates skipped\n   - Top 3 new listings by estimated compensation\n"
+  },
+  "tool_response": {
+    "type": "update",
+    "filePath": "/Users/georgebelanger/Programming/job-hunter/prompts/job-search.md",
+    "content": "# Hourly Austin Software Engineer Job Search Directive\n\nYou are an autonomous job search agent. Search for software engineering roles in Austin, TX paying >$250k total compensation. Extract structured data and append new listings to `~/Programming/job-hunter/output/jobs.csv`.\n\n## Critical Rules\n\n1. **Every URL must be a unique, individual job posting URL** — never use category/search result page URLs. If you cannot get a direct link to the posting, construct one from the job ID.\n2. **Click into each listing** to extract the real company name, full skills list, and salary. Do not guess from search result snippets.\n3. **Search ALL listed sources**, not just the first one or two that work. If a source is blocked or empty, note it in the summary and move on.\n4. **Rate limiting**: You are on Brave free tier. **Wait at least 5 seconds between web_search calls.** Use `bash sleep 5` or equivalent between searches. Prefer browser automation (navigate + scrape) over web_search when possible — browser has no rate limit.\n5. **Use browser automation as primary tool.** Navigate directly to job board URLs and scrape listings from the page. Reserve `web_search` for finding individual posting URLs that you can't get by browsing.\n\n## Search Sources\n\nSearch each of these using browser automation (navigate directly, scrape the page). Use `web_search` only as a fallback, with 5-second sleeps between calls. Spend roughly equal effort on each.\n\n1. **Built In Austin** — https://www.builtinaustin.com/jobs?search=software+engineer&level=senior&level=lead — click into each result to get the individual posting URL and company name\n2. **LinkedIn Jobs** — Search: `Austin \"software engineer\" OR \"backend engineer\" OR \"full stack\"` filtered to Senior+ level. Click into each job card to get the `/jobs/view/<id>` URL.\n3. **Indeed** — Search: `software engineer Austin TX`, filter salary $200k+. Click into postings.\n4. **Wellfound (AngelList)** — Browse Austin startup engineering roles\n5. **Direct career pages** (search each for Austin software engineering roles):\n   - Tesla (tesla.com/careers)\n   - Meta (metacareers.com)\n   - Google (careers.google.com)\n   - Apple (jobs.apple.com)\n   - Oracle (careers.oracle.com)\n   - AMD (jobs.amd.com)\n   - Indeed (indeed.com/cmp/Indeed/jobs)\n   - IBM (ibm.com/careers)\n   - Dell (jobs.dell.com)\n   - Cloudflare (cloudflare.com/careers)\n   - Stripe (stripe.com/jobs)\n   - Coinbase (coinbase.com/careers)\n\n## Filter Criteria\n\nOnly include listings that match ALL of:\n- **Location**: Austin, TX — or remote roles explicitly available to Austin residents\n- **Compensation**: Listed comp >$250k TC, or company known to pay >$250k for senior roles (FAANG, tier-1 tech)\n- **Role type**: Software Engineer, Backend Engineer, Full Stack Engineer, Platform Engineer, Infrastructure Engineer, or similar engineering IC roles\n- **Level**: Senior, Staff, Principal, L5, L6, or equivalent\n\n## Extraction\n\nFor each qualifying listing, **click into the individual posting page** and extract these CSV fields:\n\n```\ntimestamp, source, company, title, url, salary_min, salary_max, remote_policy,\nfocus_area, required_skills, preferred_skills, level, team_description,\nposting_date, is_new\n```\n\nField notes:\n- `timestamp`: ISO 8601 when you found this listing\n- `source`: builtinaustin, linkedin, indeed, wellfound, or company name for direct pages\n- `url`: **Must be the individual job posting URL**, not a search/category page. Examples:\n  - Good: `https://www.builtinaustin.com/job/stripe/senior-backend-engineer/234567`\n  - Good: `https://www.linkedin.com/jobs/view/3845672901`\n  - Bad: `https://www.builtinaustin.com/jobs?search=software+engineer`\n  - Bad: `https://www.linkedin.com/jobs/software-engineer-jobs-austin`\n- `company`: The actual company name, never \"Unknown\". Click into the posting to find it.\n- `remote_policy`: onsite, hybrid, remote, or unknown\n- `focus_area`: e.g. \"backend\", \"full stack\", \"infrastructure\", \"platform\", \"distributed systems\"\n- `required_skills` and `preferred_skills`: semicolon-separated lists extracted from the posting\n- `is_new`: true (all appended rows are new by definition)\n\n## Deduplication\n\n1. Read the existing `~/Programming/job-hunter/output/jobs.csv`\n2. Collect all URLs already present\n3. Only append listings whose URL is NOT already in the CSV\n4. If a listing has no URL, deduplicate by (company + title) pair\n\n## Output\n\n1. Append new rows to `~/Programming/job-hunter/output/jobs.csv`\n2. Print a summary to stdout:\n   - Sources checked (list each, note if blocked/empty)\n   - Number of new listings found\n   - Number of duplicates skipped\n   - Top 3 new listings by estimated compensation\n",
+    "structuredPatch": [
+      {
+        "oldStart": 1,
+        "oldLines": 6,
+        "newStart": 1,
+        "newLines": 6,
+        "lines": [
+          "-# Hourly Austin AI Job Search Directive",
+          "+# Hourly Austin Software Engineer Job Search Directive",
+          " ",
+          "-You are an autonomous job search agent. Search for AI/ML engineering roles in Austin, TX paying >$250k total compensation. Extract structured data and append new listings to `~/Programming/job-hunter/output/jobs.csv`.",
+          "+You are an autonomous job search agent. Search for software engineering roles in Austin, TX paying >$250k total compensation. Extract structured data and append new listings to `~/Programming/job-hunter/output/jobs.csv`.",
+          " ",
+          " ## Critical Rules",
+          " "
+        ]
+      },
+      {
+        "oldStart": 14,
+        "oldLines": 13,
+        "newStart": 14,
+        "newLines": 12,
+        "lines": [
+          " ",
+          " Search each of these using browser automation (navigate directly, scrape the page). Use `web_search` only as a fallback, with 5-second sleeps between calls. Spend roughly equal effort on each.",
+          " ",
+          "-1. **Built In Austin** — https://www.builtinaustin.com/jobs?search=machine+learning and https://www.builtinaustin.com/jobs?search=artificial+intelligence — click into each result to get the individual posting URL and company name",
+          "-2. **LinkedIn Jobs** — Search: `Austin \"artificial intelligence\" OR \"machine learning\"` filtered to Senior+ level. Click into each job card to get the `/jobs/view/<id>` URL.",
+          "-3. **Indeed** — Search: `AI engineer Austin TX`, filter salary $200k+. Click into postings.",
+          "-4. **Wellfound (AngelList)** — Browse Austin AI startup roles",
+          "-5. **ai-jobs.net** — Search Austin listings",
+          "-6. **Direct career pages** (search each for Austin AI/ML roles):",
+          "-   - Tesla AI (tesla.com/careers)",
+          "+1. **Built In Austin** — https://www.builtinaustin.com/jobs?search=software+engineer&level=senior&level=lead — click into each result to get the individual posting URL and company name",
+          "+2. **LinkedIn Jobs** — Search: `Austin \"software engineer\" OR \"backend engineer\" OR \"full stack\"` filtered to Senior+ level. Click into each job card to get the `/jobs/view/<id>` URL.",
+          "+3. **Indeed** — Search: `software engineer Austin TX`, filter salary $200k+. Click into postings.",
+          "+4. **Wellfound (AngelList)** — Browse Austin startup engineering roles",
+          "+5. **Direct career pages** (search each for Austin software engineering roles):",
+          "+   - Tesla (tesla.com/careers)",
+          "    - Meta (metacareers.com)",
+          "    - Google (careers.google.com)",
+          "    - Apple (jobs.apple.com)"
+        ]
+      },
+      {
+        "oldStart": 29,
+        "oldLines": 13,
+        "newStart": 28,
+        "newLines": 16,
+        "lines": [
+          "    - Indeed (indeed.com/cmp/Indeed/jobs)",
+          "    - IBM (ibm.com/careers)",
+          "    - Dell (jobs.dell.com)",
+          "+   - Cloudflare (cloudflare.com/careers)",
+          "+   - Stripe (stripe.com/jobs)",
+          "+   - Coinbase (coinbase.com/careers)",
+          " ",
+          " ## Filter Criteria",
+          " ",
+          " Only include listings that match ALL of:",
+          " - **Location**: Austin, TX — or remote roles explicitly available to Austin residents",
+          " - **Compensation**: Listed comp >$250k TC, or company known to pay >$250k for senior roles (FAANG, tier-1 tech)",
+          "-- **AI/ML focus**: Title or description mentions AI, ML, agents, LLMs, NLP, computer vision, generative AI, deep learning, or transformers",
+          "+- **Role type**: Software Engineer, Backend Engineer, Full Stack Engineer, Platform Engineer, Infrastructure Engineer, or similar engineering IC roles",
+          " - **Level**: Senior, Staff, Principal, L5, L6, or equivalent",
+          " ",
+          " ## Extraction"
+        ]
+      },
+      {
+        "oldStart": 44,
+        "oldLines": 21,
+        "newStart": 46,
+        "newLines": 21,
+        "lines": [
+          " ",
+          " ```",
+          " timestamp, source, company, title, url, salary_min, salary_max, remote_policy,",
+          "-ai_focus_area, required_skills, preferred_skills, level, team_description,",
+          "+focus_area, required_skills, preferred_skills, level, team_description,",
+          " posting_date, is_new",
+          " ```",
+          " ",
+          " Field notes:",
+          " - `timestamp`: ISO 8601 when you found this listing",
+          "-- `source`: builtinaustin, linkedin, indeed, wellfound, ai-jobs, or company name for direct pages",
+          "+- `source`: builtinaustin, linkedin, indeed, wellfound, or company name for direct pages",
+          " - `url`: **Must be the individual job posting URL**, not a search/category page. Examples:",
+          "-  - Good: `https://www.builtinaustin.com/job/affirm/senior-staff-ml-engineer/234567`",
+          "+  - Good: `https://www.builtinaustin.com/job/stripe/senior-backend-engineer/234567`",
+          "   - Good: `https://www.linkedin.com/jobs/view/3845672901`",
+          "-  - Bad: `https://www.builtinaustin.com/jobs/data-analytics/machine-learning`",
+          "-  - Bad: `https://www.linkedin.com/jobs/google-machine-learning-jobs-austin`",
+          "+  - Bad: `https://www.builtinaustin.com/jobs?search=software+engineer`",
+          "+  - Bad: `https://www.linkedin.com/jobs/software-engineer-jobs-austin`",
+          " - `company`: The actual company name, never \"Unknown\". Click into the posting to find it.",
+          " - `remote_policy`: onsite, hybrid, remote, or unknown",
+          "-- `ai_focus_area`: e.g. \"LLM agents\", \"computer vision\", \"ML infrastructure\"",
+          "+- `focus_area`: e.g. \"backend\", \"full stack\", \"infrastructure\", \"platform\", \"distributed systems\"",
+          " - `required_skills` and `preferred_skills`: semicolon-separated lists extracted from the posting",
+          " - `is_new`: true (all appended rows are new by definition)",
+          " "
+        ]
+      }
+    ],
+    "originalFile": "# Hourly Austin AI Job Search Directive\n\nYou are an autonomous job search agent. Search for AI/ML engineering roles in Austin, TX paying >$250k total compensation. Extract structured data and append new listings to `~/Programming/job-hunter/output/jobs.csv`.\n\n## Critical Rules\n\n1. **Every URL must be a unique, individual job posting URL** — never use category/search result page URLs. If you cannot get a direct link to the posting, construct one from the job ID.\n2. **Click into each listing** to extract the real company name, full skills list, and salary. Do not guess from search result snippets.\n3. **Search ALL listed sources**, not just the first one or two that work. If a source is blocked or empty, note it in the summary and move on.\n4. **Rate limiting**: You are on Brave free tier. **Wait at least 5 seconds between web_search calls.** Use `bash sleep 5` or equivalent between searches. Prefer browser automation (navigate + scrape) over web_search when possible — browser has no rate limit.\n5. **Use browser automation as primary tool.** Navigate directly to job board URLs and scrape listings from the page. Reserve `web_search` for finding individual posting URLs that you can't get by browsing.\n\n## Search Sources\n\nSearch each of these using browser automation (navigate directly, scrape the page). Use `web_search` only as a fallback, with 5-second sleeps between calls. Spend roughly equal effort on each.\n\n1. **Built In Austin** — https://www.builtinaustin.com/jobs?search=machine+learning and https://www.builtinaustin.com/jobs?search=artificial+intelligence — click into each result to get the individual posting URL and company name\n2. **LinkedIn Jobs** — Search: `Austin \"artificial intelligence\" OR \"machine learning\"` filtered to Senior+ level. Click into each job card to get the `/jobs/view/<id>` URL.\n3. **Indeed** — Search: `AI engineer Austin TX`, filter salary $200k+. Click into postings.\n4. **Wellfound (AngelList)** — Browse Austin AI startup roles\n5. **ai-jobs.net** — Search Austin listings\n6. **Direct career pages** (search each for Austin AI/ML roles):\n   - Tesla AI (tesla.com/careers)\n   - Meta (metacareers.com)\n   - Google (careers.google.com)\n   - Apple (jobs.apple.com)\n   - Oracle (careers.oracle.com)\n   - AMD (jobs.amd.com)\n   - Indeed (indeed.com/cmp/Indeed/jobs)\n   - IBM (ibm.com/careers)\n   - Dell (jobs.dell.com)\n\n## Filter Criteria\n\nOnly include listings that match ALL of:\n- **Location**: Austin, TX — or remote roles explicitly available to Austin residents\n- **Compensation**: Listed comp >$250k TC, or company known to pay >$250k for senior roles (FAANG, tier-1 tech)\n- **AI/ML focus**: Title or description mentions AI, ML, agents, LLMs, NLP, computer vision, generative AI, deep learning, or transformers\n- **Level**: Senior, Staff, Principal, L5, L6, or equivalent\n\n## Extraction\n\nFor each qualifying listing, **click into the individual posting page** and extract these CSV fields:\n\n```\ntimestamp, source, company, title, url, salary_min, salary_max, remote_policy,\nai_focus_area, required_skills, preferred_skills, level, team_description,\nposting_date, is_new\n```\n\nField notes:\n- `timestamp`: ISO 8601 when you found this listing\n- `source`: builtinaustin, linkedin, indeed, wellfound, ai-jobs, or company name for direct pages\n- `url`: **Must be the individual job posting URL**, not a search/category page. Examples:\n  - Good: `https://www.builtinaustin.com/job/affirm/senior-staff-ml-engineer/234567`\n  - Good: `https://www.linkedin.com/jobs/view/3845672901`\n  - Bad: `https://www.builtinaustin.com/jobs/data-analytics/machine-learning`\n  - Bad: `https://www.linkedin.com/jobs/google-machine-learning-jobs-austin`\n- `company`: The actual company name, never \"Unknown\". Click into the posting to find it.\n- `remote_policy`: onsite, hybrid, remote, or unknown\n- `ai_focus_area`: e.g. \"LLM agents\", \"computer vision\", \"ML infrastructure\"\n- `required_skills` and `preferred_skills`: semicolon-separated lists extracted from the posting\n- `is_new`: true (all appended rows are new by definition)\n\n## Deduplication\n\n1. Read the existing `~/Programming/job-hunter/output/jobs.csv`\n2. Collect all URLs already present\n3. Only append listings whose URL is NOT already in the CSV\n4. If a listing has no URL, deduplicate by (company + title) pair\n\n## Output\n\n1. Append new rows to `~/Programming/job-hunter/output/jobs.csv`\n2. Print a summary to stdout:\n   - Sources checked (list each, note if blocked/empty)\n   - Number of new listings found\n   - Number of duplicates skipped\n   - Top 3 new listings by estimated compensation\n"
+  },
+  "tool_use_id": "toolu_01CNWo2HV3PzqD2i8z16rXDL"
+}
+
+[2026-02-02 23:31:18] EVENT:
+{
+  "session_id": "505e3ad4-88ab-491f-82cd-9240b9534f88",
+  "transcript_path": "/Users/georgebelanger/.claude/projects/-Users-georgebelanger-Programming-dev-log/505e3ad4-88ab-491f-82cd-9240b9534f88.jsonl",
+  "cwd": "/Users/georgebelanger/Programming/dev_log",
+  "permission_mode": "acceptEdits",
+  "hook_event_name": "PostToolUse",
+  "tool_name": "Read",
+  "tool_input": {
+    "file_path": "/Users/georgebelanger/Programming/job-hunter/prompts/job-search.md"
+  },
+  "tool_response": {
+    "type": "text",
+    "file": {
+      "filePath": "/Users/georgebelanger/Programming/job-hunter/prompts/job-search.md",
+      "content": "# Hourly Austin Software Engineer Job Search Directive\n\nYou are an autonomous job search agent. Search for software engineering roles in Austin, TX paying >$250k total compensation. Extract structured data and append new listings to `~/Programming/job-hunter/output/jobs.csv`.\n\n## Critical Rules\n\n1. **Every URL must be a unique, individual job posting URL** — never use category/search result page URLs. If you cannot get a direct link to the posting, construct one from the job ID.\n2. **Click into each listing** to extract the real company name, full skills list, and salary. Do not guess from search result snippets.\n3. **Search ALL listed sources**, not just the first one or two that work. If a source is blocked or empty, note it in the summary and move on.\n4. **Rate limiting**: You are on Brave free tier. **Wait at least 5 seconds between web_search calls.** Use `bash sleep 5` or equivalent between searches. Prefer browser automation (navigate + scrape) over web_search when possible — browser has no rate limit.\n5. **Use browser automation as primary tool.** Navigate directly to job board URLs and scrape listings from the page. Reserve `web_search` for finding individual posting URLs that you can't get by browsing.\n\n## Search Sources\n\nSearch each of these using browser automation (navigate directly, scrape the page). Use `web_search` only as a fallback, with 5-second sleeps between calls. Spend roughly equal effort on each.\n\n1. **Built In Austin** — https://www.builtinaustin.com/jobs?search=software+engineer&level=senior&level=lead — click into each result to get the individual posting URL and company name\n2. **LinkedIn Jobs** — Search: `Austin \"software engineer\" OR \"backend engineer\" OR \"full stack\"` filtered to Senior+ level. Click into each job card to get the `/jobs/view/<id>` URL.\n3. **Indeed** — Search: `software engineer Austin TX`, filter salary $200k+. Click into postings.\n4. **Wellfound (AngelList)** — Browse Austin startup engineering roles\n5. **Direct career pages** (search each for Austin software engineering roles):\n   - Tesla (tesla.com/careers)\n   - Meta (metacareers.com)\n   - Google (careers.google.com)\n   - Apple (jobs.apple.com)\n   - Oracle (careers.oracle.com)\n   - AMD (jobs.amd.com)\n   - Indeed (indeed.com/cmp/Indeed/jobs)\n   - IBM (ibm.com/careers)\n   - Dell (jobs.dell.com)\n   - Cloudflare (cloudflare.com/careers)\n   - Stripe (stripe.com/jobs)\n   - Coinbase (coinbase.com/careers)\n\n## Filter Criteria\n\nOnly include listings that match ALL of:\n- **Location**: Austin, TX — or remote roles explicitly available to Austin residents\n- **Compensation**: Listed comp >$250k TC, or company known to pay >$250k for senior roles (FAANG, tier-1 tech)\n- **Role type**: Software Engineer, Backend Engineer, Full Stack Engineer, Platform Engineer, Infrastructure Engineer, or similar engineering IC roles\n- **Level**: Senior, Staff, Principal, L5, L6, or equivalent\n\n## Extraction\n\nFor each qualifying listing, **click into the individual posting page** and extract these CSV fields:\n\n```\ntimestamp, source, company, title, url, salary_min, salary_max, remote_policy,\nfocus_area, required_skills, preferred_skills, level, team_description,\nposting_date, is_new\n```\n\nField notes:\n- `timestamp`: ISO 8601 when you found this listing\n- `source`: builtinaustin, linkedin, indeed, wellfound, or company name for direct pages\n- `url`: **Must be the individual job posting URL**, not a search/category page. Examples:\n  - Good: `https://www.builtinaustin.com/job/stripe/senior-backend-engineer/234567`\n  - Good: `https://www.linkedin.com/jobs/view/3845672901`\n  - Bad: `https://www.builtinaustin.com/jobs?search=software+engineer`\n  - Bad: `https://www.linkedin.com/jobs/software-engineer-jobs-austin`\n- `company`: The actual company name, never \"Unknown\". Click into the posting to find it.\n- `remote_policy`: onsite, hybrid, remote, or unknown\n- `focus_area`: e.g. \"backend\", \"full stack\", \"infrastructure\", \"platform\", \"distributed systems\"\n- `required_skills` and `preferred_skills`: semicolon-separated lists extracted from the posting\n- `is_new`: true (all appended rows are new by definition)\n\n## Deduplication\n\n1. Read the existing `~/Programming/job-hunter/output/jobs.csv`\n2. Collect all URLs already present\n3. Only append listings whose URL is NOT already in the CSV\n4. If a listing has no URL, deduplicate by (company + title) pair\n\n## Output\n\n1. Append new rows to `~/Programming/job-hunter/output/jobs.csv`\n2. Print a summary to stdout:\n   - Sources checked (list each, note if blocked/empty)\n   - Number of new listings found\n   - Number of duplicates skipped\n   - Top 3 new listings by estimated compensation\n",
+      "numLines": 82,
+      "startLine": 1,
+      "totalLines": 82
+    }
+  },
+  "tool_use_id": "toolu_01KMkCepRBJDMjy6bzjWseoK"
+}
+
+[2026-02-02 23:31:56] EVENT:
+{
+  "session_id": "505e3ad4-88ab-491f-82cd-9240b9534f88",
+  "transcript_path": "/Users/georgebelanger/.claude/projects/-Users-georgebelanger-Programming-dev-log/505e3ad4-88ab-491f-82cd-9240b9534f88.jsonl",
+  "cwd": "/Users/georgebelanger/Programming/dev_log",
+  "permission_mode": "acceptEdits",
+  "hook_event_name": "PostToolUse",
+  "tool_name": "Edit",
+  "tool_input": {
+    "file_path": "/Users/georgebelanger/Programming/job-hunter/prompts/job-search.md",
+    "old_string": "5. **Direct career pages** (search each for Austin software engineering roles):\n   - Tesla (tesla.com/careers)\n   - Meta (metacareers.com)\n   - Google (careers.google.com)\n   - Apple (jobs.apple.com)\n   - Oracle (careers.oracle.com)\n   - AMD (jobs.amd.com)\n   - Indeed (indeed.com/cmp/Indeed/jobs)\n   - IBM (ibm.com/careers)\n   - Dell (jobs.dell.com)\n   - Cloudflare (cloudflare.com/careers)\n   - Stripe (stripe.com/jobs)\n   - Coinbase (coinbase.com/careers)\n\n## Filter Criteria",
+    "new_string": "5. **Direct career pages** (search each for Austin software engineering roles):\n   - Tesla (tesla.com/careers)\n   - Meta (metacareers.com)\n   - Google (careers.google.com)\n   - Apple (jobs.apple.com)\n   - Oracle (careers.oracle.com)\n   - AMD (jobs.amd.com)\n   - Indeed (indeed.com/cmp/Indeed/jobs)\n   - IBM (ibm.com/careers)\n   - Dell (jobs.dell.com)\n   - Cloudflare (cloudflare.com/careers)\n   - Stripe (stripe.com/jobs)\n   - Coinbase (coinbase.com/careers)\n\n## Creative Search Strategies\n\nDon't just hit the obvious job boards. Get creative:\n\n1. **X/Twitter** — Search for `hiring Austin engineer`, `Austin startup hiring`, `we're hiring senior engineer Austin`. Tech founders and recruiters often post jobs on X before they hit job boards.\n\n2. **Recently funded companies** — Check these sources for Austin startups that just raised:\n   - Crunchbase: search Austin Series A/B/C in last 90 days\n   - TechCrunch Austin funding news\n   - Austin Business Journal tech funding announcements\n   - Then check their career pages directly\n\n3. **Less common job boards**:\n   - Hacker News \"Who's Hiring\" monthly thread (search for Austin)\n   - TripleByte / Interviewing.io\n   - Hired.com\n   - Otta.com\n   - levels.fyi job board\n   - Blind job postings\n   - Y Combinator Work at a Startup (workatastartup.com)\n   - Key Values (keyvalues.com)\n\n4. **Austin-specific sources**:\n   - Austin Tech Alliance job board\n   - Capital Factory portfolio companies\n   - Austin Inno\n   - r/austinjobs subreddit\n\n5. **Reverse search** — Find engineers at Austin companies on LinkedIn, see where they work, check if those companies are hiring.\n\n6. **Conference/meetup sponsors** — Companies sponsoring Austin tech meetups or conferences are often hiring.\n\nSpend ~30% of your time on these creative sources. They often surface roles before they hit LinkedIn/Indeed.\n\n## Filter Criteria",
+    "replace_all": false
+  },
+  "tool_response": {
+    "filePath": "/Users/georgebelanger/Programming/job-hunter/prompts/job-search.md",
+    "oldString": "5. **Direct career pages** (search each for Austin software engineering roles):\n   - Tesla (tesla.com/careers)\n   - Meta (metacareers.com)\n   - Google (careers.google.com)\n   - Apple (jobs.apple.com)\n   - Oracle (careers.oracle.com)\n   - AMD (jobs.amd.com)\n   - Indeed (indeed.com/cmp/Indeed/jobs)\n   - IBM (ibm.com/careers)\n   - Dell (jobs.dell.com)\n   - Cloudflare (cloudflare.com/careers)\n   - Stripe (stripe.com/jobs)\n   - Coinbase (coinbase.com/careers)\n\n## Filter Criteria",
+    "newString": "5. **Direct career pages** (search each for Austin software engineering roles):\n   - Tesla (tesla.com/careers)\n   - Meta (metacareers.com)\n   - Google (careers.google.com)\n   - Apple (jobs.apple.com)\n   - Oracle (careers.oracle.com)\n   - AMD (jobs.amd.com)\n   - Indeed (indeed.com/cmp/Indeed/jobs)\n   - IBM (ibm.com/careers)\n   - Dell (jobs.dell.com)\n   - Cloudflare (cloudflare.com/careers)\n   - Stripe (stripe.com/jobs)\n   - Coinbase (coinbase.com/careers)\n\n## Creative Search Strategies\n\nDon't just hit the obvious job boards. Get creative:\n\n1. **X/Twitter** — Search for `hiring Austin engineer`, `Austin startup hiring`, `we're hiring senior engineer Austin`. Tech founders and recruiters often post jobs on X before they hit job boards.\n\n2. **Recently funded companies** — Check these sources for Austin startups that just raised:\n   - Crunchbase: search Austin Series A/B/C in last 90 days\n   - TechCrunch Austin funding news\n   - Austin Business Journal tech funding announcements\n   - Then check their career pages directly\n\n3. **Less common job boards**:\n   - Hacker News \"Who's Hiring\" monthly thread (search for Austin)\n   - TripleByte / Interviewing.io\n   - Hired.com\n   - Otta.com\n   - levels.fyi job board\n   - Blind job postings\n   - Y Combinator Work at a Startup (workatastartup.com)\n   - Key Values (keyvalues.com)\n\n4. **Austin-specific sources**:\n   - Austin Tech Alliance job board\n   - Capital Factory portfolio companies\n   - Austin Inno\n   - r/austinjobs subreddit\n\n5. **Reverse search** — Find engineers at Austin companies on LinkedIn, see where they work, check if those companies are hiring.\n\n6. **Conference/meetup sponsors** — Companies sponsoring Austin tech meetups or conferences are often hiring.\n\nSpend ~30% of your time on these creative sources. They often surface roles before they hit LinkedIn/Indeed.\n\n## Filter Criteria",
+    "originalFile": "# Hourly Austin Software Engineer Job Search Directive\n\nYou are an autonomous job search agent. Search for software engineering roles in Austin, TX paying >$250k total compensation. Extract structured data and append new listings to `~/Programming/job-hunter/output/jobs.csv`.\n\n## Critical Rules\n\n1. **Every URL must be a unique, individual job posting URL** — never use category/search result page URLs. If you cannot get a direct link to the posting, construct one from the job ID.\n2. **Click into each listing** to extract the real company name, full skills list, and salary. Do not guess from search result snippets.\n3. **Search ALL listed sources**, not just the first one or two that work. If a source is blocked or empty, note it in the summary and move on.\n4. **Rate limiting**: You are on Brave free tier. **Wait at least 5 seconds between web_search calls.** Use `bash sleep 5` or equivalent between searches. Prefer browser automation (navigate + scrape) over web_search when possible — browser has no rate limit.\n5. **Use browser automation as primary tool.** Navigate directly to job board URLs and scrape listings from the page. Reserve `web_search` for finding individual posting URLs that you can't get by browsing.\n\n## Search Sources\n\nSearch each of these using browser automation (navigate directly, scrape the page). Use `web_search` only as a fallback, with 5-second sleeps between calls. Spend roughly equal effort on each.\n\n1. **Built In Austin** — https://www.builtinaustin.com/jobs?search=software+engineer&level=senior&level=lead — click into each result to get the individual posting URL and company name\n2. **LinkedIn Jobs** — Search: `Austin \"software engineer\" OR \"backend engineer\" OR \"full stack\"` filtered to Senior+ level. Click into each job card to get the `/jobs/view/<id>` URL.\n3. **Indeed** — Search: `software engineer Austin TX`, filter salary $200k+. Click into postings.\n4. **Wellfound (AngelList)** — Browse Austin startup engineering roles\n5. **Direct career pages** (search each for Austin software engineering roles):\n   - Tesla (tesla.com/careers)\n   - Meta (metacareers.com)\n   - Google (careers.google.com)\n   - Apple (jobs.apple.com)\n   - Oracle (careers.oracle.com)\n   - AMD (jobs.amd.com)\n   - Indeed (indeed.com/cmp/Indeed/jobs)\n   - IBM (ibm.com/careers)\n   - Dell (jobs.dell.com)\n   - Cloudflare (cloudflare.com/careers)\n   - Stripe (stripe.com/jobs)\n   - Coinbase (coinbase.com/careers)\n\n## Filter Criteria\n\nOnly include listings that match ALL of:\n- **Location**: Austin, TX — or remote roles explicitly available to Austin residents\n- **Compensation**: Listed comp >$250k TC, or company known to pay >$250k for senior roles (FAANG, tier-1 tech)\n- **Role type**: Software Engineer, Backend Engineer, Full Stack Engineer, Platform Engineer, Infrastructure Engineer, or similar engineering IC roles\n- **Level**: Senior, Staff, Principal, L5, L6, or equivalent\n\n## Extraction\n\nFor each qualifying listing, **click into the individual posting page** and extract these CSV fields:\n\n```\ntimestamp, source, company, title, url, salary_min, salary_max, remote_policy,\nfocus_area, required_skills, preferred_skills, level, team_description,\nposting_date, is_new\n```\n\nField notes:\n- `timestamp`: ISO 8601 when you found this listing\n- `source`: builtinaustin, linkedin, indeed, wellfound, or company name for direct pages\n- `url`: **Must be the individual job posting URL**, not a search/category page. Examples:\n  - Good: `https://www.builtinaustin.com/job/stripe/senior-backend-engineer/234567`\n  - Good: `https://www.linkedin.com/jobs/view/3845672901`\n  - Bad: `https://www.builtinaustin.com/jobs?search=software+engineer`\n  - Bad: `https://www.linkedin.com/jobs/software-engineer-jobs-austin`\n- `company`: The actual company name, never \"Unknown\". Click into the posting to find it.\n- `remote_policy`: onsite, hybrid, remote, or unknown\n- `focus_area`: e.g. \"backend\", \"full stack\", \"infrastructure\", \"platform\", \"distributed systems\"\n- `required_skills` and `preferred_skills`: semicolon-separated lists extracted from the posting\n- `is_new`: true (all appended rows are new by definition)\n\n## Deduplication\n\n1. Read the existing `~/Programming/job-hunter/output/jobs.csv`\n2. Collect all URLs already present\n3. Only append listings whose URL is NOT already in the CSV\n4. If a listing has no URL, deduplicate by (company + title) pair\n\n## Output\n\n1. Append new rows to `~/Programming/job-hunter/output/jobs.csv`\n2. Print a summary to stdout:\n   - Sources checked (list each, note if blocked/empty)\n   - Number of new listings found\n   - Number of duplicates skipped\n   - Top 3 new listings by estimated compensation\n",
+    "structuredPatch": [
+      {
+        "oldStart": 32,
+        "oldLines": 6,
+        "newStart": 32,
+        "newLines": 40,
+        "lines": [
+          "    - Stripe (stripe.com/jobs)",
+          "    - Coinbase (coinbase.com/careers)",
+          " ",
+          "+## Creative Search Strategies",
+          "+",
+          "+Don't just hit the obvious job boards. Get creative:",
+          "+",
+          "+1. **X/Twitter** — Search for `hiring Austin engineer`, `Austin startup hiring`, `we're hiring senior engineer Austin`. Tech founders and recruiters often post jobs on X before they hit job boards.",
+          "+",
+          "+2. **Recently funded companies** — Check these sources for Austin startups that just raised:",
+          "+   - Crunchbase: search Austin Series A/B/C in last 90 days",
+          "+   - TechCrunch Austin funding news",
+          "+   - Austin Business Journal tech funding announcements",
+          "+   - Then check their career pages directly",
+          "+",
+          "+3. **Less common job boards**:",
+          "+   - Hacker News \"Who's Hiring\" monthly thread (search for Austin)",
+          "+   - TripleByte / Interviewing.io",
+          "+   - Hired.com",
+          "+   - Otta.com",
+          "+   - levels.fyi job board",
+          "+   - Blind job postings",
+          "+   - Y Combinator Work at a Startup (workatastartup.com)",
+          "+   - Key Values (keyvalues.com)",
+          "+",
+          "+4. **Austin-specific sources**:",
+          "+   - Austin Tech Alliance job board",
+          "+   - Capital Factory portfolio companies",
+          "+   - Austin Inno",
+          "+   - r/austinjobs subreddit",
+          "+",
+          "+5. **Reverse search** — Find engineers at Austin companies on LinkedIn, see where they work, check if those companies are hiring.",
+          "+",
+          "+6. **Conference/meetup sponsors** — Companies sponsoring Austin tech meetups or conferences are often hiring.",
+          "+",
+          "+Spend ~30% of your time on these creative sources. They often surface roles before they hit LinkedIn/Indeed.",
+          "+",
+          " ## Filter Criteria",
+          " ",
+          " Only include listings that match ALL of:"
+        ]
+      }
+    ],
+    "userModified": false,
+    "replaceAll": false
+  },
+  "tool_use_id": "toolu_01Urxah3Pf8cuVfRJar2uhD5"
+}
+
